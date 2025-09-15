@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Quote of the Day</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 60px;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #333;
+        }
+
+        #quote {
+            font-size: 24px;
+            margin: 40px 0 10px 0;
+            color: #222;
+        }
+
+        #author {
+            font-size: 18px;
+            color: #777;
+            margin-bottom: 40px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Quote of the Day</h1>
+    <div id="quote">Loading quote...</div>
+    <div id="author"></div>
+  
+    <button onclick="getRandQuote()">Get Another Quote</button>
+
+   
+
+
+    <script>
+        async function getRandQuote() {
+            const response = await fetch('/quote');
+            const data = await response.json();
+            document.getElementById('quote').textContent = `"${data.text}"`;
+            document.getElementById('author').textContent = `— ${data.author}`;
+        }
+
+    
+        window.onload = getRandQuote();
+    </script>
+</body>
+
+</html>
